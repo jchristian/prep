@@ -35,7 +35,7 @@ namespace prep.collections
 
     public IMatchAn<ItemToMatch> greater_than(PropertyType value)
     {
-        return original.create_using(new FallsInRange<PropertyType>(Create.a_range<PropertyType>().GreaterThan(value)));
+        return original.create_using(new FallsInRange<PropertyType>(Create.another_range<PropertyType>().From(value).Exclusive().To().Infinity()));
     }
 
     public IMatchAn<ItemToMatch> between(PropertyType start, PropertyType end)

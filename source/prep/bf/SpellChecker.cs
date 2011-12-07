@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 
 namespace prep.bf
 {
@@ -12,14 +11,11 @@ namespace prep.bf
             initialize_bloom_filter(dictionary);
         }
 
+        public bool is_word_in_dictionary(string word) {}
+
         void initialize_bloom_filter(string[] dictionary)
         {
             filter = new BitArray(250000, false);
-        }
-
-        public bool is_word_in_dictionary(string word)
-        {
-            
         }
     }
 }

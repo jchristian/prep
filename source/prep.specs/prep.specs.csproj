@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="MovieLibrarySpecs.cs" />
     <Compile Include="MovieTitleComparer.cs" />
+    <Compile Include="SpellCheckerSpecs.cs" />
     <Compile Include="utility\CollectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

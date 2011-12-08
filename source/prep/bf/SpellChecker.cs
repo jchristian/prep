@@ -1,21 +1,31 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 
 namespace prep.bf
 {
-    public class SpellChecker
+  public class SpellChecker
+  {
+    ICheckIfIContainHashes bloom_filter;
+    ICreateHashes hash_factory;
+
+    public SpellChecker(ICheckIfIContainHashes bloom_filter, ICreateHashes hash_factory)
     {
-        BitArray filter;
-
-        public SpellChecker(string[] dictionary)
-        {
-            initialize_bloom_filter(dictionary);
-        }
-
-        public bool is_word_in_dictionary(string word) {}
-
-        void initialize_bloom_filter(string[] dictionary)
-        {
-            filter = new BitArray(250000, false);
-        }
+      this.bloom_filter = bloom_filter;
+      this.hash_factory = hash_factory;
     }
+
+    public bool is_valid_word(string word)
+    {
+      return bloom_filter.contains(hash_factory.get_hashes(word));
+    }
+  }
+
+  public interface ICheckIfIContainHashes
+  {
+    bool contains(IEnumerable<int> hashes);
+  }
+
+  public interface ICreateHashes
+  {
+    IEnumerable<int> get_hashes(string word);
+  }
 }

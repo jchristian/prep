@@ -26,7 +26,7 @@ namespace prep.specs
           var bloom_filter = depends.on<ICheckIfIContainHashes>();
           var hashes_for_the_word = new[] { hash };
 
-          hash_creator.setup(x => x.get_hashes(word)).Return(hashes_for_the_word);
+          hash_creator.setup(x => x.get_hashes_for(word)).Return(hashes_for_the_word);
           bloom_filter.setup(x => x.contains(hashes_for_the_word)).Return(true);
         };
 
@@ -53,7 +53,7 @@ namespace prep.specs
 
           var hashes_for_the_word = new[] { hash };
 
-          hash_creator.setup(x => x.get_hashes(word)).Return(hashes_for_the_word);
+          hash_creator.setup(x => x.get_hashes_for(word)).Return(hashes_for_the_word);
           bloom_filter.setup(x => x.contains(hashes_for_the_word)).Return(false);
         };
 
@@ -66,6 +66,35 @@ namespace prep.specs
         static bool does_the_word_exist;
         static string word;
       }
+    }
+  }
+
+  public class FrameworkHashCreatorSpecs
+  {
+    public abstract class concern : Observes<ICreateAHash, FrameworkHashCreator>
+    {
+    }
+
+    [Subject(typeof(FrameworkHashCreator))]
+    public class when_generating_a_hash_for_the_word : concern
+    {
+
+      Because of = () =>
+        sut.create_for(word);
+
+      It should_return_the_hash_from_the_framework = () =>
+        the_generated_hash.ShouldEqual(hash);
+
+      static int the_generated_hash;
+      static int hash;
+    }
+  }
+
+  public class FrameworkHashCreator : ICreateAHash
+  {
+    public int create_for(string word)
+    {
+      throw new System.NotImplementedException();
     }
   }
 }

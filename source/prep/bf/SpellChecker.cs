@@ -15,7 +15,7 @@ namespace prep.bf
 
     public bool is_valid_word(string word)
     {
-      return bloom_filter.contains(hash_factory.get_hashes(word));
+      return bloom_filter.contains(hash_factory.get_hashes_for(word));
     }
   }
 
@@ -26,6 +26,6 @@ namespace prep.bf
 
   public interface ICreateHashes
   {
-    IEnumerable<int> get_hashes(string word);
+    IEnumerable<int> get_hashes_for(string word);
   }
 }
